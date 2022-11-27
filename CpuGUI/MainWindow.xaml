@@ -24,7 +24,9 @@
 
         </Grid>
         <TextBox x:Name="codeTextBox" HorizontalAlignment="Left" Margin="10,93,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="234" Height="197" AcceptsReturn="True"/>
-        <Button x:Name="startCpuButton" Content="Start" HorizontalAlignment="Left" Margin="10,33,0,0" VerticalAlignment="Top" Width="59" Click="startCpuButton_Click"/>
+        <Button x:Name="startCpuButton" Content="Start" HorizontalAlignment="Left" Margin="63,33,0,0" VerticalAlignment="Top" Width="59" Click="startCpuButton_Click"/>
+        <Button x:Name="prevExecuteCommandButton" Content="Prev" HorizontalAlignment="Left" Margin="10,33,0,0" VerticalAlignment="Top" Width="39" Click="prevExecuteCommandButton_Click"/>
+        <Button x:Name="nextExecuteCommandButton" Content="Next" HorizontalAlignment="Left" Margin="134,33,0,0" VerticalAlignment="Top" Width="39" Click="nextExecuteCommandButton_Click"/>
 
 
     </Grid>

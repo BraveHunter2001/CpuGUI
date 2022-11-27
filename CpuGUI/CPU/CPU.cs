@@ -1,6 +1,7 @@
 ﻿using CPUConsole.Commands;
 using CPUConsole.Commands.Ports;
 using CPUConsole.Memory;
+using Microsoft.Win32;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
@@ -13,6 +14,7 @@ namespace CPUConsole
         public event CPUHandler CommandWasExecute;
 
         public Registers registers = new Registers(new int[4], new float[3]);
+        public List<Registers> registersStates = new List<Registers>();
 
         RAM mem = new RAM(10);
         Port port = new USB();
@@ -45,11 +47,28 @@ namespace CPUConsole
             for (int i = 0; i < commands.Count; i = registers.ProgrammCounter)
             {
                 var curCommand = commands[i];
-                //curCommand.Dump();
+
+                registersStates.Add(registers.Clone());
+
                 curCommand.Execute(registers);
                 CommandWasExecute?.Invoke();
-                await Task.Delay(1000);
+                await Task.Delay(500);
             }
+        }
+
+        public void ExcuteCommandNext()
+        {
+
+            var curCommand = commands[registers.ProgrammCounter];
+            curCommand.Execute(registers);
+            CommandWasExecute?.Invoke();
+        }
+        public void ExcuteCommandPrev()
+        {
+            var prevReg = registersStates[registers.ProgrammCounter];
+
+            //curCommand.Execute(registers);
+            CommandWasExecute?.Invoke();
         }
 
         public void Clear()

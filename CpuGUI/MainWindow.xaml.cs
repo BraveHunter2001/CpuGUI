@@ -78,5 +78,15 @@ namespace CpuGUI
             cpu.AddCommands(p.GetCommands(codeTextBox.Text));
             cpu.ExecuteCommands();
         }
+
+        private void nextExecuteCommandButton_Click(object sender, RoutedEventArgs e)
+        {
+            cpu.ExcuteCommandNext();
+        }
+
+        private void prevExecuteCommandButton_Click(object sender, RoutedEventArgs e)
+        {
+            cpu.ExcuteCommandPrev();
+        }
     }
 }

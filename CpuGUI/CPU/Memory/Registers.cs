@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace CPUConsole.Memory
 {
@@ -102,6 +103,16 @@ namespace CPUConsole.Memory
             foreach (var key in Flags.Keys)
                 Flags[key] = false;
             _pc = 0;
+        }
+
+        public Registers Clone()
+        {
+            Registers reg = new Registers(Integer, Float, Flags);
+            reg.Integer = (int[])Integer.Clone();
+            reg.Float = (float[])Float.Clone();
+            reg.Flags = Flags.ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
+            reg.ProgrammCounter = _pc;
+            return reg;
         }
     }
 }
