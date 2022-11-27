@@ -13,7 +13,7 @@ namespace CPUConsole.Memory
         StepByStep = 'T',
         SuperUser = 'U'
     }
-    public class Registers : IDump
+    public class Registers 
     {
 
         public int[] Integer;

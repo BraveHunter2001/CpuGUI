@@ -71,7 +71,7 @@ namespace CpuGUI
 
         private void startCpuButton_Click(object sender, RoutedEventArgs e)
         {
-            
+            cpu.Clear();
             cpu.AddCommands(p.GetCommands(codeTextBox.Text));
             cpu.ExecuteCommands();
             UpdateRegView();
