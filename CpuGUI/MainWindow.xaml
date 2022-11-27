@@ -5,9 +5,27 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CpuGUI"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="440" Width="601">
     <Grid x:Name="mainLayout">
-       
+        <Grid x:Name="Register" Margin="300,0,25,10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="45*"/>
+                <ColumnDefinition Width="94*"/>
+            </Grid.ColumnDefinitions>
+
+            <Label Content="INT" HorizontalAlignment="Left" Margin="8,1,0,0" VerticalAlignment="Top" RenderTransformOrigin="-2.428,-0.542"/>
+            <ListBox x:Name="intRegListBox"  Margin="0,32,45,23"/>
+            <Label Content="FLOAT" HorizontalAlignment="Left" Margin="46,1,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.679,0.834" Width="43"/>
+            <ListBox x:Name="floatRegListBox"  Margin="45,32,0,23"/>
+            <ListBox x:Name="flagsListBox" Grid.Column="1"  Margin="5,32,10,207"/>
+            <Label Grid.Column="1" Content="FLAGS" HorizontalAlignment="Left" Margin="70,1,0,0" VerticalAlignment="Top"/>
+            <Label Grid.Column="1" Content="PC" HorizontalAlignment="Left" Margin="5,212,0,0" VerticalAlignment="Top"/>
+            <Label x:Name="ProgramCounterLabel" Grid.Column="1" HorizontalAlignment="Left" Margin="35,212,0,0" VerticalAlignment="Top"/>
+
+        </Grid>
+        <TextBox x:Name="codeTextBox" HorizontalAlignment="Left" Margin="10,93,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="234" Height="197"/>
+        <Button x:Name="startCpuButton" Content="Start" HorizontalAlignment="Left" Margin="10,33,0,0" VerticalAlignment="Top" Width="59" Click="startCpuButton_Click"/>
+
 
     </Grid>
 </Window>

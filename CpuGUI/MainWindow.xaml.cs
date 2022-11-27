@@ -1,4 +1,5 @@
 ﻿using CPUConsole;
+using CPUConsole.Commands.Flow;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,19 +22,59 @@ namespace CpuGUI
     /// </summary>
     public partial class MainWindow : Window
     {
+        CPU cpu;
+        Parser p;
         public MainWindow()
         {
-            CPU cpu = new CPU();
-            InitializeComponent();
-            ListBox box = new ListBox();
-            foreach (var reg in  cpu.registers.Integer)
-            {
-                box.Items.Add(reg.ToString());
-            }
+            cpu = new CPU();
+            p = new Parser("C:\\Users\\Ilya\\Desktop\\comm.txt");
             
+            InitializeComponent();
+            codeTextBox.Text = p.textCode;
+            cpu.AddCommands(p.GetCommands(codeTextBox.Text));
+            cpu.ExecuteCommands();
+            InitRegister();
 
-            mainLayout.Children.Add(box);
+
+
+
         }
 
+        public void InitRegister()
+        {
+            foreach (var reg in cpu.registers.Integer)
+                intRegListBox.Items.Add(reg);
+            foreach (var reg in cpu.registers.Float)
+                floatRegListBox.Items.Add(reg);
+            foreach (var reg in cpu.registers.Flags)
+                flagsListBox.Items.Add($"{reg.Key}[{reg.Value}]");
+            ProgramCounterLabel.Content = cpu.registers.ProgrammCounter;
+        }
+
+        public void UpdateRegView()
+        {
+           for(int i = 0; i< cpu.registers.Integer.Length; i++)
+                intRegListBox.Items[i] = cpu.registers.Integer[i];
+
+            for (int i = 0; i < cpu.registers.Float.Length; i++)
+                floatRegListBox.Items[i] = cpu.registers.Float[i];
+
+            var flag = cpu.registers.Flags.ToList();
+            for (int i = 0; i < cpu.registers.Flags.Count; i++)
+            {
+
+                flagsListBox.Items[i] = ($"{flag[i].Key}[{flag[i].Value}]");
+            }
+
+            ProgramCounterLabel.Content = cpu.registers.ProgrammCounter;
+        }
+
+        private void startCpuButton_Click(object sender, RoutedEventArgs e)
+        {
+            
+            cpu.AddCommands(p.GetCommands(codeTextBox.Text));
+            cpu.ExecuteCommands();
+            UpdateRegView();
+        }
     }
 }

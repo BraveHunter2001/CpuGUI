@@ -82,24 +82,7 @@ namespace CPUConsole.Memory
             }; ;
         }
 
-        public void Dump()
-        {
-            Console.Write("RegInt[");
-            foreach (var i in Integer)
-                Console.Write($"{i} ");
-            Console.Write("] ");
-
-            Console.Write("RegFloat[");
-            foreach (var i in Float)
-                Console.Write($"{i} ");
-            Console.Write("] ");
-            Console.Write($"PC[{_pc}] ");
-
-            Console.Write("Flags: ");
-            foreach (var i in Flags)
-                Console.Write($"{i.Key}={Convert.ToInt16(i.Value)} ");
-
-        }
+     
 
         public Dictionary<int, Action> InterruptTable = new Dictionary<int, Action>()
         {
@@ -108,6 +91,17 @@ namespace CPUConsole.Memory
             {2, Interrupts.MemoryException}
         };
 
+        public void Clean()
+        {
+            for (int i = 0; i < Integer.Length; i++)
+                Integer[i] = 0;
 
+            for (int i = 0; i < Float.Length; i++)
+                Float[i] = 0;
+
+            foreach (var key in Flags.Keys)
+                Flags[key] = false;
+            _pc = 0;
+        }
     }
 }

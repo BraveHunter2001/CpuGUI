@@ -25,7 +25,16 @@ namespace CPUConsole
         {
             this.commands.AddRange(commands);
         }
+        public void AddCommands(List<object[]> commandsObjs)
+        {
+            List<Command> commands = new List<Command>();
 
+            foreach (var c in commandsObjs)
+            {
+                commands.Add(commadFactory.CreateCommand(c));
+            }
+            this.commands.AddRange(commands);
+        }
         public void ExecuteCommands()
         {
             for (int i = 0; i < commands.Count; i = registers.ProgrammCounter)
@@ -34,9 +43,13 @@ namespace CPUConsole
                 //curCommand.Dump();
                 curCommand.Execute(registers);
 
-
-               
             }
+        }
+
+        public void Clear()
+        {
+            commands.Clear();
+            registers.Clean();
         }
 
 
