@@ -2,11 +2,16 @@
 using CPUConsole.Commands.Ports;
 using CPUConsole.Memory;
 using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace CPUConsole
 {
     internal class CPU
     {
+        public delegate void CPUHandler();
+        public event CPUHandler CommandWasExecute;
+
         public Registers registers = new Registers(new int[4], new float[3]);
 
         RAM mem = new RAM(10);
@@ -35,14 +40,15 @@ namespace CPUConsole
             }
             this.commands.AddRange(commands);
         }
-        public void ExecuteCommands()
+        async public void ExecuteCommands()
         {
             for (int i = 0; i < commands.Count; i = registers.ProgrammCounter)
             {
                 var curCommand = commands[i];
                 //curCommand.Dump();
                 curCommand.Execute(registers);
-
+                CommandWasExecute?.Invoke();
+                await Task.Delay(1000);
             }
         }
 

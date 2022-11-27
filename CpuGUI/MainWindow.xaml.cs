@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -27,16 +28,16 @@ namespace CpuGUI
         public MainWindow()
         {
             cpu = new CPU();
+            cpu.CommandWasExecute += UpdateRegView;
             p = new Parser("C:\\Users\\Ilya\\Desktop\\comm.txt");
-            
+
             InitializeComponent();
+            InitRegister();
+
             codeTextBox.Text = p.textCode;
             cpu.AddCommands(p.GetCommands(codeTextBox.Text));
             cpu.ExecuteCommands();
-            InitRegister();
-
-
-
+            
 
         }
 
@@ -49,9 +50,10 @@ namespace CpuGUI
             foreach (var reg in cpu.registers.Flags)
                 flagsListBox.Items.Add($"{reg.Key}[{reg.Value}]");
             ProgramCounterLabel.Content = cpu.registers.ProgrammCounter;
+            
         }
 
-        public void UpdateRegView()
+         public void UpdateRegView()
         {
            for(int i = 0; i< cpu.registers.Integer.Length; i++)
                 intRegListBox.Items[i] = cpu.registers.Integer[i];
@@ -67,6 +69,7 @@ namespace CpuGUI
             }
 
             ProgramCounterLabel.Content = cpu.registers.ProgrammCounter;
+            
         }
 
         private void startCpuButton_Click(object sender, RoutedEventArgs e)
@@ -74,7 +77,6 @@ namespace CpuGUI
             cpu.Clear();
             cpu.AddCommands(p.GetCommands(codeTextBox.Text));
             cpu.ExecuteCommands();
-            UpdateRegView();
         }
     }
 }
