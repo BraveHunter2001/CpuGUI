@@ -1,5 +1,6 @@
 ﻿using CPUConsole;
 using CPUConsole.Commands.Flow;
+using CPUConsole.Memory;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,6 +30,8 @@ namespace CpuGUI
         {
             cpu = new CPU();
             cpu.CommandWasExecute += UpdateRegView;
+            cpu.CommandWasExecute += UpdateButtonVisible;
+
             p = new Parser("C:\\Users\\Ilya\\Desktop\\comm.txt");
 
             InitializeComponent();
@@ -72,6 +75,25 @@ namespace CpuGUI
             
         }
 
+        public void UpdateButtonVisible()
+        {
+            if (cpu.registers.ProgrammCounter == 0)
+            {
+                prevExecuteCommandButton.IsEnabled = false;
+                startCpuButton.Content = "Start";
+            }
+            else
+            {
+                prevExecuteCommandButton.IsEnabled = true;
+                startCpuButton.Content = "Restart";
+            }
+
+            if (cpu.registers.ProgrammCounter >= cpu.CountCommand)
+                nextExecuteCommandButton.IsEnabled = false;
+            else
+                nextExecuteCommandButton.IsEnabled = true;
+        }
+
         private void startCpuButton_Click(object sender, RoutedEventArgs e)
         {
             cpu.Clear();
@@ -81,12 +103,16 @@ namespace CpuGUI
 
         private void nextExecuteCommandButton_Click(object sender, RoutedEventArgs e)
         {
+            cpu.registers.Flags[FlagsRegister.StepByStep] = true;
             cpu.ExcuteCommandNext();
         }
 
         private void prevExecuteCommandButton_Click(object sender, RoutedEventArgs e)
         {
+            
             cpu.ExcuteCommandPrev();
+            cpu.registers.Flags[FlagsRegister.StepByStep] = true;
+            flagsListBox.Items[5] = ($"{FlagsRegister.StepByStep}[True]");
         }
     }
 }

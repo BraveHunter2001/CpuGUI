@@ -13,9 +13,10 @@ namespace CPUConsole
         public delegate void CPUHandler();
         public event CPUHandler CommandWasExecute;
 
+
         public Registers registers = new Registers(new int[4], new float[3]);
         public List<Registers> registersStates = new List<Registers>();
-
+        public int CountCommand { get; private set; }
         RAM mem = new RAM(10);
         Port port = new USB();
         public CommadFactory commadFactory;
@@ -31,6 +32,7 @@ namespace CPUConsole
         public void AddCommands(List<Command> commands)
         {
             this.commands.AddRange(commands);
+            CountCommand = this.commands.Count;
         }
         public void AddCommands(List<object[]> commandsObjs)
         {
@@ -41,6 +43,7 @@ namespace CPUConsole
                 commands.Add(commadFactory.CreateCommand(c));
             }
             this.commands.AddRange(commands);
+            CountCommand = this.commands.Count;
         }
         async public void ExecuteCommands()
         {
@@ -58,16 +61,23 @@ namespace CPUConsole
 
         public void ExcuteCommandNext()
         {
-
+            if (registers.ProgrammCounter > commands.Count)
+                throw new System.Exception("PC more count command");
             var curCommand = commands[registers.ProgrammCounter];
+
+            registersStates[registers.ProgrammCounter] = registers.Clone();
+
             curCommand.Execute(registers);
+
             CommandWasExecute?.Invoke();
         }
         public void ExcuteCommandPrev()
         {
-            var prevReg = registersStates[registers.ProgrammCounter];
+            if (registers.ProgrammCounter == 0)
+                throw new System.Exception("Programm counter is zero");
+            var prevReg = registersStates[registers.ProgrammCounter - 1];
+            registers = prevReg;
 
-            //curCommand.Execute(registers);
             CommandWasExecute?.Invoke();
         }
 
