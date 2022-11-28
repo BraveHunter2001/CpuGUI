@@ -186,7 +186,7 @@ namespace CpuGUI
         {
             superUser = !superUser;
             cpu.registers.Flags[FlagsRegister.SuperUser] = superUser;
-            UpdateRegView();s
+            UpdateRegView();
         }
     }
 }
