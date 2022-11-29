@@ -14,7 +14,6 @@ namespace CpuGUI
     public partial class MainWindow : Window
     {
         CPU cpu;
-        Parser p;
         bool superUser = false;
         public MainWindow()
         {
@@ -22,14 +21,14 @@ namespace CpuGUI
             cpu.CommandWasExecute += UpdateRegView;
             cpu.CommandWasExecute += UpdateButtonVisible;
 
-            p = new Parser("C:\\Users\\Ilya\\Desktop\\comm.txt");
+           
 
             InitializeComponent();
             InitRegister();
 
-            codeTextBox.Text = p.textCode;
-            cpu.AddCommands(p.GetCommands(codeTextBox.Text));
-            cpu.ExecuteCommands();
+           // codeTextBox.Text = p.textCode;
+           // cpu.AddCommands(p.GetCommands(codeTextBox.Text));
+            //cpu.ExecuteCommands();
 
 
         }
@@ -88,7 +87,7 @@ namespace CpuGUI
         private void startCpuButton_Click(object sender, RoutedEventArgs e)
         {
             cpu.Clear();
-            cpu.AddCommands(p.GetCommands(codeTextBox.Text));
+            cpu.AddCommands(Parser.GetCommands(codeTextBox.Text));
             cpu.ExecuteCommands();
         }
 

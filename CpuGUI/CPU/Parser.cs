@@ -5,20 +5,10 @@ using System.IO;
 
 namespace CPUConsole
 {
-    public class Parser
+    public static class Parser
     {
-        string path = null;
-        public string textCode;
-        public Parser(string path)
-        {
-            this.path = path;
-            using (StreamReader sr = new StreamReader(path))
-            {
-                textCode = sr.ReadToEnd();
-            }
-        }
 
-        public List<object[]> GetCommands(string text)
+        public static List<object[]> GetCommands(string text)
         {
             List<object[]> comObjs = new List<object[]>();
 
@@ -52,7 +42,7 @@ namespace CPUConsole
             return comObjs;
         }
 
-        private CommandOP ParseCommandOP(string str)
+        private static CommandOP ParseCommandOP(string str)
         {
             if (Enum.TryParse(str, out CommandOP result))
             {
