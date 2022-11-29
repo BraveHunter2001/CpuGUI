@@ -1,5 +1,7 @@
 ﻿using CPUConsole;
 using CPUConsole.Memory;
+using Microsoft.Win32;
+using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -187,6 +189,19 @@ namespace CpuGUI
             superUser = !superUser;
             cpu.registers.Flags[FlagsRegister.SuperUser] = superUser;
             UpdateRegView();
+        }
+
+        private void openFileCodeButton_Click(object sender, RoutedEventArgs e)
+        {
+           
+            OpenFileDialog ofd = new OpenFileDialog();
+            if (ofd.ShowDialog() == true)
+            {
+                codeTextBox.Text = File.ReadAllText(ofd.FileName);
+                
+            }
+                
+
         }
     }
 }

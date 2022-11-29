@@ -22,6 +22,7 @@
             <Label Grid.Column="1" Content="FLAGS" HorizontalAlignment="Left" Margin="70,1,0,0" VerticalAlignment="Top"/>
             <Label Grid.Column="1" Content="PC" HorizontalAlignment="Left" Margin="5,212,0,0" VerticalAlignment="Top"/>
             <Label x:Name="ProgramCounterLabel" Grid.Column="1" HorizontalAlignment="Left" Margin="35,212,0,0" VerticalAlignment="Top"/>
+            <Button x:Name="openFileCodeButton" Content="Open" HorizontalAlignment="Left" Margin="-215,12,0,0" VerticalAlignment="Top" Width="47" Click="openFileCodeButton_Click"/>
 
         </Grid>
         <TextBox x:Name="codeTextBox" HorizontalAlignment="Left" Margin="26,77,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="201" Height="312" AcceptsReturn="True"/>
