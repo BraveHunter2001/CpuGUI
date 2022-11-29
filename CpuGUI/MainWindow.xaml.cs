@@ -1,4 +1,5 @@
 ﻿using CPUConsole;
+using CPUConsole.Commands;
 using CPUConsole.Memory;
 using Microsoft.Win32;
 using System.IO;
@@ -20,8 +21,10 @@ namespace CpuGUI
             cpu = new CPU();
             cpu.CommandWasExecute += UpdateRegView;
             cpu.CommandWasExecute += UpdateButtonVisible;
+            cpu.CommandWasDump += UpdateCommandDumpView;
 
-           
+
+
 
             InitializeComponent();
             InitRegister();
@@ -91,6 +94,10 @@ namespace CpuGUI
             cpu.ExecuteCommands();
         }
 
+        public void UpdateCommandDumpView(IDump dump)
+        {
+            commandDumperTextBlock.Text = dump.Dump();
+        }
         private void nextExecuteCommandButton_Click(object sender, RoutedEventArgs e)
         {
             cpu.registers.Flags[FlagsRegister.StepByStep] = true;

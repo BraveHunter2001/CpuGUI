@@ -23,6 +23,9 @@
             <Label Grid.Column="1" Content="PC" HorizontalAlignment="Left" Margin="5,212,0,0" VerticalAlignment="Top"/>
             <Label x:Name="ProgramCounterLabel" Grid.Column="1" HorizontalAlignment="Left" Margin="35,212,0,0" VerticalAlignment="Top"/>
             <Button x:Name="openFileCodeButton" Content="Open" HorizontalAlignment="Left" Margin="-215,12,0,0" VerticalAlignment="Top" Width="47" Click="openFileCodeButton_Click"/>
+            <GroupBox x:Name="commandDumperGroupBox" Grid.Column="1" Header="Command" Margin="1,243,10,98">
+                <TextBlock x:Name="commandDumperTextBlock" HorizontalAlignment="Left" Margin="10,0,0,0" TextWrapping="Wrap" Width="233" Height="38"/>
+            </GroupBox>
 
         </Grid>
         <TextBox x:Name="codeTextBox" HorizontalAlignment="Left" Margin="26,77,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="201" Height="312" AcceptsReturn="True"/>

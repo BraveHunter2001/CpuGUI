@@ -5,8 +5,11 @@ using CPUConsole.Memory;
 
 namespace CPUConsole.Commands
 {
-
-    public abstract class Command 
+    public interface IDump
+    {
+        public string Dump();
+    }
+    public abstract class Command : IDump
     {
         private readonly int _op = 0;
        
@@ -20,11 +23,13 @@ namespace CPUConsole.Commands
             
         }
         public abstract void Execute(Registers registers);
-        
-        //public virtual void Dump()
-        //{
-        //    Console.Write($"OP:{OPcode} ");
-        //}
+
+        public virtual string Dump()
+        {
+            return $"OP:{OPcode} ";
+        }
+
+ 
 
     }
     public abstract class CommandPort : Command
@@ -40,10 +45,10 @@ namespace CPUConsole.Commands
         }
 
        
-        //public override void Dump()
-        //{
-        //    Console.Write($"OP:{OPcode} r{regAddr} ,  p{pinPort}");
-        //}
+       public override string Dump()
+        {
+            return $"OP:{OPcode} r{regAddr} ,  p{pinPort}";
+       }
     }
     public abstract class CommandMemmory : Command
     {
@@ -58,12 +63,12 @@ namespace CPUConsole.Commands
             this.mem = mem;
         }
 
-        
 
-        //public override void Dump()
-        //{
-        //    Console.Write($"OP:{OPcode} r{registerAddres} ,  M{memmoryAddres}");
-        //}
+
+        public override string Dump()
+        {
+            return $"OP:{OPcode} r{registerAddres} ,  M{memmoryAddres}";
+        }
 
     }
 
@@ -74,10 +79,10 @@ namespace CPUConsole.Commands
         {
             this.constant= constant;
         }
-        //public override void Dump()
-        //{
-        //    Console.Write($"OP:{OPcode} Const{constant} ");
-        //}
+        public override string Dump()
+        {
+            return $"OP:{OPcode} Const{constant} ";
+        }
     }
     public abstract class CommandFormatRDS : Command
     {
@@ -89,10 +94,10 @@ namespace CPUConsole.Commands
             this.registerSource = rs;
         }
 
-        //public override void Dump()
-        //{
-        //    Console.Write($"OP:{OPcode} r{registerDestination} <- r{registerSource}");
-        //}
+        public override string Dump()
+        {
+            return $"OP:{OPcode} r{registerDestination} <- r{registerSource}";
+        }
     }
 
     /// <summary>
@@ -108,10 +113,10 @@ namespace CPUConsole.Commands
             this.constant = constant;
         }
 
-        //public override void Dump()
-        //{
-        //    Console.Write($"OP:{OPcode} r{registerDestination} <- {constant}");
-        //}
+        public override string Dump()
+        {
+            return $"OP:{OPcode} r{registerDestination} <- {constant}";
+        }
     }
     /// <summary>
     /// RegisterFormat dest source constant
@@ -125,10 +130,10 @@ namespace CPUConsole.Commands
 
         }
 
-        //public override void Dump()
-        //{
-        //    Console.Write($"OP:{OPcode} r{registerDestination} <- r{registerSource}, {constant}");
-        //}
+        public override string Dump()
+        {
+            return $"OP:{OPcode} r{registerDestination} <- r{registerSource}, {constant}";
+        }
     }
     /// <summary>
     /// RegisterFormat dest source constant
@@ -145,10 +150,10 @@ namespace CPUConsole.Commands
             registerSourceR = regRight;
         }
 
-        //public override void Dump()
-        //{
-        //    Console.Write($"OP:{OPcode} r{registerDestination} <- r{registerSourceL}, r{registerSourceR}");
-        //}
+        public override string Dump()
+        {
+            return $"OP:{OPcode} r{registerDestination} <- r{registerSourceL}, r{registerSourceR}";
+        }
     }
 
     

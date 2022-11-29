@@ -12,7 +12,8 @@ namespace CPUConsole
     {
         public delegate void CPUHandler();
         public event CPUHandler CommandWasExecute;
-
+        public delegate void CommandDumper(IDump dump);
+        public event CommandDumper CommandWasDump;
 
         public Registers registers = new Registers(new int[32], new float[32]);
         public List<Registers> registersStates = new List<Registers>();
@@ -55,6 +56,8 @@ namespace CPUConsole
 
                 curCommand.Execute(registers);
                 CommandWasExecute?.Invoke();
+                CommandWasDump?.Invoke(curCommand);
+
                 await Task.Delay(500);
             }
         }
