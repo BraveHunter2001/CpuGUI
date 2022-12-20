@@ -360,7 +360,7 @@ namespace CPUConsole.Commands
                     cmd = new SDW(part1, part2,mem);
                     break;
                 case CommandOP.SHW:
-                    cmd = new SDW(part1, part2, mem);
+                    cmd = new SHW(part1, part2, mem);
                     break;
                 case CommandOP.SW:
                     cmd = new SW(part1, part2, mem);

@@ -138,21 +138,19 @@ namespace CPUConsole.Commands
     /// <summary>
     /// RegisterFormat dest source constant
     /// </summary>
-    public abstract class CommandFormatRDSS : Command
+    public abstract class CommandFormatRDSS : CommandFormatRDS
     {
-        protected readonly int registerDestination;
-        protected readonly int registerSourceL;
+        
         protected readonly int registerSourceR;
-        public CommandFormatRDSS(int rd, int regLeft, int regRight, int opcode) : base(opcode)
+        public CommandFormatRDSS(int rd, int regLeft, int regRight, int opcode) : base(rd, regLeft, opcode)
         {
-            registerDestination = rd;
-            registerSourceL = regLeft;
+            
             registerSourceR = regRight;
         }
 
         public override string Dump()
         {
-            return $"OP:{OPcode} r{registerDestination} <- r{registerSourceL}, r{registerSourceR}";
+            return $"OP:{OPcode} r{registerDestination} <- r{registerSource}, r{registerSourceR}";
         }
     }
 

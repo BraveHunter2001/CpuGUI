@@ -18,11 +18,12 @@ namespace CPUConsole.Commands.ALU.Integer
             if (registers.Integer[registerSourceR] == 0)
                 registers.InterruptTable[0]();
 
-            var answer = registers.Integer[registerSourceL] / registers.Integer[registerSourceR];
+            int answer = 0;
+            try { answer = checked(registers.Integer[registerSource] / registers.Integer[registerSourceR]); }
+            catch (OverflowException) { registers.Flags[FlagsRegister.Overflowing] = true; }
 
             registers.Flags[FlagsRegister.Zero] = answer == 0;
             registers.Flags[FlagsRegister.Sign] = answer < 0;
-            registers.Flags[FlagsRegister.Overflowing] = Math.Abs(answer) > int.MaxValue;
             registers.Flags[FlagsRegister.Carry] = registers.Flags[FlagsRegister.Overflowing];
 
             registers.ProgrammCounter++;

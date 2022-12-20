@@ -4,7 +4,7 @@ namespace CPUConsole.Memory
 {
     public  class RAM
     {
-        Int32[] mem;
+        public Int32[] mem;
         public RAM(int sizemem)
         {
             mem = new Int32[sizemem];

@@ -1,5 +1,6 @@
 ﻿using CPUConsole;
 using CPUConsole.Commands;
+using CPUConsole.Commands.Flow;
 using CPUConsole.Memory;
 using Microsoft.Win32;
 using System.IO;
@@ -44,6 +45,9 @@ namespace CpuGUI
                 floatRegListBox.Items.Add(reg);
             foreach (var reg in cpu.registers.Flags)
                 flagsListBox.Items.Add($"{reg.Key}[{reg.Value}]");
+            foreach (var mem in cpu.mem.mem)
+                memoryListBox.Items.Add(mem);
+
             ProgramCounterLabel.Content = cpu.registers.ProgrammCounter;
 
         }
@@ -55,6 +59,9 @@ namespace CpuGUI
 
             for (int i = 0; i < cpu.registers.Float.Length; i++)
                 floatRegListBox.Items[i] = cpu.registers.Float[i];
+
+            for (int i = 0; i < cpu.registers.Float.Length; i++)
+                memoryListBox.Items[i] = cpu.mem.mem[i];
 
             var flag = cpu.registers.Flags.ToList();
             for (int i = 0; i < cpu.registers.Flags.Count; i++)

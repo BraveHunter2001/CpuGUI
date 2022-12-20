@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CpuGUI"
         mc:Ignorable="d"
-        Title="CPU" Height="438" Width="635">
+        Title="CPU" Height="438" Width="739">
     <Grid x:Name="mainLayout">
 
         <Grid x:Name="Register" Margin="235,0,10,10">
@@ -15,17 +15,19 @@
             </Grid.ColumnDefinitions>
 
             <Label Content="INT" HorizontalAlignment="Left" Margin="14,1,0,0" VerticalAlignment="Top" RenderTransformOrigin="-2.428,-0.542"/>
-            <ListBox x:Name="intRegListBox"  Margin="10,32,69,23" SelectionChanged="intRegListBox_SelectionChanged"/>
-            <Label Content="FLOAT" HorizontalAlignment="Left" Margin="62,1,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.679,0.834" Width="43"/>
-            <ListBox x:Name="floatRegListBox"  Margin="62,32,10,23" SelectionChanged="floatRegListBox_SelectionChanged"/>
-            <ListBox x:Name="flagsListBox" Grid.Column="1"  Margin="8,32,7,207"/>
-            <Label Grid.Column="1" Content="FLAGS" HorizontalAlignment="Left" Margin="70,1,0,0" VerticalAlignment="Top"/>
-            <Label Grid.Column="1" Content="PC" HorizontalAlignment="Left" Margin="5,212,0,0" VerticalAlignment="Top"/>
-            <Label x:Name="ProgramCounterLabel" Grid.Column="1" HorizontalAlignment="Left" Margin="35,212,0,0" VerticalAlignment="Top"/>
+            <ListBox x:Name="intRegListBox"  Margin="10,32,94,23" SelectionChanged="intRegListBox_SelectionChanged"/>
+            <Label Content="FLOAT" HorizontalAlignment="Left" Margin="84,4,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.679,0.834" Width="43"/>
+            <ListBox x:Name="floatRegListBox"  Margin="84,32,23,23" SelectionChanged="floatRegListBox_SelectionChanged"/>
+            <ListBox x:Name="flagsListBox" Grid.Column="1"  Margin="87,32,7,207"/>
+            <Label Grid.Column="1" Content="FLAGS" HorizontalAlignment="Left" Margin="185,4,0,0" VerticalAlignment="Top"/>
+            <Label Grid.Column="1" Content="PC" HorizontalAlignment="Left" Margin="87,211,0,0" VerticalAlignment="Top"/>
+            <Label x:Name="ProgramCounterLabel" Grid.Column="1" HorizontalAlignment="Left" Margin="117,211,0,0" VerticalAlignment="Top"/>
             <Button x:Name="openFileCodeButton" Content="Open" HorizontalAlignment="Left" Margin="-215,12,0,0" VerticalAlignment="Top" Width="47" Click="openFileCodeButton_Click"/>
-            <GroupBox x:Name="commandDumperGroupBox" Grid.Column="1" Header="Command" Margin="1,243,10,98">
+            <GroupBox x:Name="commandDumperGroupBox" Grid.Column="1" Header="Command" Margin="5,318,6,23">
                 <TextBlock x:Name="commandDumperTextBlock" HorizontalAlignment="Left" Margin="10,0,0,0" TextWrapping="Wrap" Width="233" Height="38"/>
             </GroupBox>
+            <ListBox x:Name="memoryListBox" Grid.Column="1"  Margin="0,35,279,108"/>
+            <Label Grid.Column="1" Content="Mem" HorizontalAlignment="Left" Margin="5,4,0,0" VerticalAlignment="Top"/>
 
         </Grid>
         <TextBox x:Name="codeTextBox" HorizontalAlignment="Left" Margin="26,77,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="201" Height="312" AcceptsReturn="True"/>

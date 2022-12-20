@@ -18,11 +18,12 @@ namespace CPUConsole.Commands.ALU.Float
             if (registers.Float[registerSourceR] == 0)
                 registers.InterruptTable[0]();
 
-            var answer = registers.Float[registerSourceL] / registers.Float[registerSourceR];
+            float answer = 0;
+            try { answer = checked(registers.Float[registerSource] / registers.Float[registerSourceR]); }
+            catch (OverflowException) { registers.Flags[FlagsRegister.Overflowing] = true; }
 
             registers.Flags[FlagsRegister.Zero] = answer == 0;
             registers.Flags[FlagsRegister.Sign] = answer < 0;
-            registers.Flags[FlagsRegister.Overflowing] = Math.Abs(answer) > float.MaxValue;
             registers.Flags[FlagsRegister.Carry] = registers.Flags[FlagsRegister.Overflowing];
 
             registers.Float[registerDestination] = answer;

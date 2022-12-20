@@ -18,7 +18,7 @@ namespace CPUConsole
         public Registers registers = new Registers(new int[32], new float[32]);
         public List<Registers> registersStates = new List<Registers>();
         public int CountCommand { get; private set; }
-        RAM mem = new RAM(10);
+        public RAM mem = new RAM(64);
         Port port = new USB();
         public CommadFactory commadFactory;
 
@@ -88,6 +88,7 @@ namespace CPUConsole
         {
             commands.Clear();
             registers.Clean();
+            mem = new RAM(64);
         }
 
 
