@@ -6,6 +6,7 @@ using CPUConsole.Commands.Memory;
 using CPUConsole.Commands.Ports;
 using CPUConsole.Commands.Special;
 using CPUConsole.Memory;
+using CpuGUI.CPU.Commands.ALU.Integer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -64,7 +65,9 @@ namespace CPUConsole.Commands
         NON,
         RF,
         SSU,
-        WR
+        WR,
+        ADC,
+        SBB
        
     }
 
@@ -229,6 +232,12 @@ namespace CPUConsole.Commands
                     break;
                 case CommandOP.NON:
                     cmd = new Non();
+                    break;
+                case CommandOP.ADC:
+                    cmd = new ADC(part1,part2,part3);
+                    break;
+                case CommandOP.SBB:
+                    cmd = new SBB(part1, part2, part3);
                     break;
 
             }
